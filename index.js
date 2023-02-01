@@ -35,11 +35,6 @@ function inputEventListener(index) {
     let getSum = arrOfInput[index].value;
 
 
-    console.log(arrOfInput[index]);
-    console.log(arrOfSelect);
-    console.log(arrOfInput);
-
-
     // Проверка целое ли число
     function isInteger(x) {
         if (Number.isInteger(x)) {
