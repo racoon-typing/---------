@@ -1,14 +1,9 @@
 // Курс
-const dollar_Ruble = 70;
+const dollar_Ruble = 69.88;
 const dollar_Euro = 0.92;
-
-
-// function selectValue() {
-//     let getValue = this.value;
-//     console.log(getValue);
-// }
-
-// firstSelect.addEventListener('input', selectValue)
+const dollar_СNY = 6.74;
+const dollar_GBP = 0.81;
+const dollar_JPY= 129.72;
 
 
 // Нода инпута
@@ -26,20 +21,12 @@ function inputEventListener(index) {
         secondInputIndex = 0;
     }
 
-    console.log(secondInputIndex);
-
-
     // Нода селекта
     const firstSelect = document.querySelector('.converter__output-select--fisrt');
     const secondSelect = document.querySelector('.converter__output-select--second');
 
     // Масиив селектов
     let arrOfSelect = [firstSelect, secondSelect];
-
-    // Нода инпута
-    // const firstInputNode = document.querySelector('.converter__input--first').value;
-    // const secondInputNode = document.querySelector('.converter__input--second').value;
-
 
     // Масиив инпутов
     let arrOfInput = [firstInputNode, secondInputNode];
@@ -122,7 +109,7 @@ function inputEventListener(index) {
         if (arrOfSelect[secondInputIndex].value === 'USD') {
             // Результат
             let result = isInteger(getSum / dollar_Euro);
-            
+
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
             return;
@@ -145,5 +132,6 @@ function inputEventListener(index) {
 
 }
 
-
+// Слушатели на Инпуте
 firstInputNode.addEventListener('input', (() => inputEventListener(0)));
+secondInputNode.addEventListener('input', (() => inputEventListener(1)));
