@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style/style.css">
     <title>Конвертер</title>
 </head>
+
 <body class="page__body">
     <main class="main">
         <h1 class="main__title">
@@ -18,12 +20,17 @@
             <div class="converter__output">
                 <div class="converter__output-content converter__output-content--first">
                     <div class="converter__output-flag-wrapper">
-                        <img src="" alt="" class="converter__output-flag converter__output-flag--first">
+                        <img src="img/usa.png" alt="" class="converter__output-flag converter__output-flag--first">
                     </div>
 
                     <div class="converter__output-currency">
-                        <select name="" id="" class="converter__output-select">
-                            <option value="">USD</option>
+                        <select name="" id="" class="converter__output-select converter__output-select--fisrt">
+                            <!-- 1 -->
+                            <option value="USD">USD</option>
+                            <!-- 2 -->
+                            <option value="RUB">RUB</option>
+                            <!-- 3 -->
+                            <option value="EUR">EUR</option>
                         </select>
 
                         <p class="converter__output-description converter__output-description--first">
@@ -31,22 +38,31 @@
                         </p>
                     </div>
 
-                    <input class="converter__input" type="number" name="" id="" placeholder="1">
+                    <input class="converter__input converter__input--first" type="number" name="" id="" placeholder="0">
                 </div>
 
                 <div class="converter__output-img">
-                    <img class="converter__img" src="" alt="">
+                    <svg class="converter__img" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 14 14">
+                        <path
+                            d="m 1,4.9375637 0,-0.375 c 0,-0.31066 0.2518359,-0.5625 0.5625,-0.5625 l 8.4375,0 0,-1.125 c 0,-0.50079 0.607008,-0.75098 0.960258,-0.39776 l 1.875,1.875 c 0.219656,0.21968 0.219656,0.57584 0,0.79549 l -1.875,1.875 C 10.608344,7.3746437 10,7.1279437 10,6.6250637 l 0,-1.125 -8.4375,0 C 1.2518359,5.5000637 1,5.2482237 1,4.9375637 Z m 11.4375,3.5625 -8.4375,0 0,-1.125 c 0,-0.49955 -0.6061406,-0.75187 -0.9602578,-0.39776 l -1.875,1.875 c -0.21965626,0.21968 -0.21965626,0.57584 0,0.79549 l 1.875,1.8750003 C 3.3919609,11.874994 4,11.627494 4,11.125064 l 0,-1.125 8.4375,0 C 12.748164,10.000064 13,9.7482237 13,9.4375637 l 0,-0.375 c 0,-0.31066 -0.251836,-0.5625 -0.5625,-0.5625 z" />
+                    </svg>
                 </div>
 
 
                 <div class="converter__output-content converter__output-content--second">
                     <div class="converter__output-flag-wrapper">
-                        <img src="" alt="" class="converter__output-flag converter__output-flag--second">
+                        <img src="img/russia.png" alt="" class="converter__output-flag converter__output-flag--second">
                     </div>
 
                     <div class="converter__output-currency">
-                        <select name="" id="" class="converter__output-select">
-                            <option value="">RUB</option>
+                        <select name="" id="" class="converter__output-select converter__output-select--second">
+                            <!-- 1 -->
+                            <option value="RUB">RUB</option>
+                            <!-- 2 -->
+                            <option value="USD">USD</option>
+                            <!-- 3 -->
+                            <option value="EUR">EUR</option>
                         </select>
 
                         <p class="converter__output-description converter__output-description--second">
@@ -54,7 +70,7 @@
                         </p>
                     </div>
 
-                    <input class="converter__input" type="number" name="" id="" placeholder="70.2">
+                    <input class="converter__input converter__input--second" type="number" name="" id="" placeholder="0">
                 </div>
             </div>
 
@@ -147,9 +163,10 @@
 
 
 
-    </main>    
+    </main>
 
 
     <script src="index.js"></script>
 </body>
+
 </html>

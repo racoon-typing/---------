@@ -33,6 +33,7 @@
 
 .converter {
     width: 100%;
+    max-width: 500px;
 }
 
 .converter__output {
@@ -43,14 +44,23 @@
     display: grid;
     grid-template-columns: 60px 140px 1fr;
     padding-right: 20px;
+    align-items: center;
 }
 
 .converter__output-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: var(--bg-second);
     margin: 10px auto;
+}
+
+.converter__img {
+    width: 26px;
+    height: auto;
 }
 
 .converter__output-flag-wrapper {
@@ -117,6 +127,6 @@
     border: none;
     background-color: transparent;
     color: var(--bg-second);
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 400;
 }
