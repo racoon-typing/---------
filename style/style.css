@@ -1,0 +1,122 @@
+:root {
+    --bg-main: #464646;
+    --bg-second: #FFDB8B;
+    --color-main: #ffffff;
+    --color-second: #808080;
+}
+
+.page__body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    color: var(--color-main);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.main__title {
+    margin: 0;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.converter {
+    width: 100%;
+}
+
+.converter__output {
+    margin-bottom: 30px;
+}
+
+.converter__output-content {
+    display: grid;
+    grid-template-columns: 60px 140px 1fr;
+    padding-right: 20px;
+}
+
+.converter__output-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-second);
+    margin: 10px auto;
+}
+
+.converter__output-flag-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.converter__output-flag {
+    display: block;
+    width: 90%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.converter__output-select {
+    margin-bottom: 5px;
+    background-color: transparent;
+    color: var(--color-main);
+    font-size: 18px;
+    border: none;
+}
+
+.converter__output-select:focus-visible {
+    outline: none;
+}
+
+.converter__output-description {
+    margin: 0;
+    color: var(--color-second);
+    font-size: 13px;
+}
+
+.converter__input {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    padding: 0 5px;
+    border: none;
+    color: var(--color-main);
+    text-align: end;
+    font-size: 18px;
+}
+
+.converter__input::placeholder {
+    color: var(--color-main);
+}
+
+.converter__input:focus-visible {
+    outline: none;
+}
+
+.converter__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.converter__button {
+    width: 100%;
+    min-height: 60px;
+    border: none;
+    background-color: transparent;
+    color: var(--bg-second);
+    font-size: 18px;
+    font-weight: 500;
+}
