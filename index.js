@@ -2,15 +2,6 @@
 const dollar_Ruble = 70;
 const dollar_Euro = 0.92;
 
-// Нода инпута
-const firstInputNode = document.querySelector('.converter__input--first');
-const secondInputNode = document.querySelector('.converter__input--second');
-
-// Нода селект
-const firstSelect = document.querySelector('.converter__output-select--fisrt');
-const secondSelect = document.querySelector('.converter__output-select--second');
-
-console.log(firstSelect);
 
 // function selectValue() {
 //     let getValue = this.value;
@@ -19,16 +10,50 @@ console.log(firstSelect);
 
 // firstSelect.addEventListener('input', selectValue)
 
+
+// Нода инпута
+const firstInputNode = document.querySelector('.converter__input--first');
+const secondInputNode = document.querySelector('.converter__input--second');
+
+
 // Функция расчета курса для первого инпута
-function inputEventListenerFirst() {
-    let getSum = this.value;
-    let getFirstSelect = firstSelect.value;
-    let getSecondSelect = secondSelect.value;
+function inputEventListener(index) {
+    let secondInputIndex;
 
-    console.log(getSum);
-    console.log(getFirstSelect);
-    console.log(getSecondSelect);
+    if (index === 0) {
+        secondInputIndex = 1;
+    } else {
+        secondInputIndex = 0;
+    }
 
+    console.log(secondInputIndex);
+
+
+    // Нода селекта
+    const firstSelect = document.querySelector('.converter__output-select--fisrt');
+    const secondSelect = document.querySelector('.converter__output-select--second');
+
+    // Масиив селектов
+    let arrOfSelect = [firstSelect, secondSelect];
+
+    // Нода инпута
+    // const firstInputNode = document.querySelector('.converter__input--first').value;
+    // const secondInputNode = document.querySelector('.converter__input--second').value;
+
+
+    // Масиив инпутов
+    let arrOfInput = [firstInputNode, secondInputNode];
+
+    // Введенное значение
+    let getSum = arrOfInput[index].value;
+
+
+    console.log(arrOfInput[index]);
+    console.log(arrOfSelect);
+    console.log(arrOfInput);
+
+
+    // Проверка целое ли число
     function isInteger(x) {
         if (Number.isInteger(x)) {
             return x;
@@ -36,40 +61,84 @@ function inputEventListenerFirst() {
             // Кол-во знаков после запятой у первого числа
             const decimalNumberComponent = x.toString().match(/\.(\d+)/)?.[1].length
 
-            if (decimalNumberComponent >= 5) {
-                return x.toFixed(5);
-            } else if (decimalNumberComponent >= 1 && decimalNumberComponent < 5) {
+            if (decimalNumberComponent >= 3) {
+                return x.toFixed(3);
+            } else if (decimalNumberComponent >= 1 && decimalNumberComponent < 3) {
                 return x.toFixed(decimalNumberComponent)
             } else {
-                return x; 
+                return x;
             }
         }
     }
 
     // Расчет курса в зависимости от выбранных валют
-    if (getFirstSelect === 'USD') {
-        if (getSecondSelect === 'RUB') {
+    if (arrOfSelect[index].value === 'USD') {
+        if (arrOfSelect[secondInputIndex].value === 'RUB') {
+            // Результат
             let result = isInteger(getSum * dollar_Ruble);
-            secondInputNode.value = result;
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
             return;
-        } else if (getSecondSelect === 'EUR') {
+        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+            // Результат
             let result = isInteger(getSum * dollar_Euro);
-            secondInputNode.value = result;
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
             return;
         } else {
+            // Результат
             let result = getSum;
-            secondInputNode.value = result;
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
             return;
         }
-    } else if (getFirstSelect === 'RUB') {
-        if (getSecondSelect === 'USD') {
-            secondInputNode.value = getSum / dollar_Ruble;
+    } else if (arrOfSelect[index].value === 'RUB') {
+        if (arrOfSelect[secondInputIndex].value === 'USD') {
+            // Результат
+            let result = isInteger(getSum / dollar_Ruble);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
             return;
-        } else if (getSecondSelect === 'EUR') {
-            secondInputNode.value = getSum / dollar_Ruble * dollar_Euro;
+        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+            // Результат
+            let result = isInteger(getSum / dollar_Ruble * dollar_Euro);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
             return;
         } else {
-            secondInputNode.value = getSum
+            // Результат
+            let result = getSum;
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        }
+    } else if (arrOfSelect[index].value === 'EUR') {
+        if (arrOfSelect[secondInputIndex].value === 'USD') {
+            // Результат
+            let result = isInteger(getSum / dollar_Euro);
+            
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+            // Результат
+            let result = isInteger(getSum * dollar_Ruble / dollar_Euro);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else {
+            // Результат
+            let result = getSum;
+
+            // Выводит результат в нужный инпут           
+            arrOfInput[secondInputIndex].value = result;
             return;
         }
     }
@@ -77,4 +146,4 @@ function inputEventListenerFirst() {
 }
 
 
-firstInputNode.addEventListener('input', inputEventListenerFirst)
+firstInputNode.addEventListener('input', (() => inputEventListener(0)));
