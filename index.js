@@ -246,3 +246,16 @@ function inputEventListener(index) {
 // Слушатели на Инпуте
 firstInputNode.addEventListener('input', (() => inputEventListener(0)));
 secondInputNode.addEventListener('input', (() => inputEventListener(1)));
+
+
+// Нода списка кнопок
+const converterList = document.querySelector('.converter__list');
+
+
+function getNumber() {
+    
+}
+
+
+
+converterList.addEventListener('click', getNumber)
