@@ -240,7 +240,6 @@ function inputEventListener(index) {
             return;
         }
     }
-
 }
 
 // Слушатели на Инпуте
@@ -251,35 +250,77 @@ secondInputNode.addEventListener('input', (() => inputEventListener(1)));
 // Нода списка кнопок
 const converterList = document.querySelector('.converter__list');
 
-
+// Массив с введенными данными
 let outputArr = [];
+// Массив outputArr преобразованный в строку
+let outputString = '';
 function getNumber(e) {
     console.log(e.target.id);
     // Получает нажатое значение
     let getValue = e.target.id;
 
+
+    // Выводит значение в инпут 
+    function getOutputValue(outputArr) {
+        outputString = outputArr.join('');
+        firstInputNode.value = outputString;
+    }
+
     // Удаляет значение при нажатии на кнопку del
     if (getValue === 'del') {
-        if (outputArr === []) {
-            console.log("пустой массив")
+        if (outputArr.length === 0) {
             return;
         }
-        console.log('Удалить');
+
+        // Удаляет последний элемент масcива
         outputArr.pop();
 
-        console.log(outputArr);
-
-
-        let outputString = outputArr.join('');
-        firstInputNode.value = outputString;
+        // Функция вывода значения в инпут
+        getOutputValue(outputArr);
         return;
     }
 
+    // Проверка если первое число 0, то нельзя ввести 0
+    if (getValue === '0' && outputArr[0] === '0') {
+        return;
+    } 
 
+    // Проверка если первое число 0, и вводят другое число, то ноль стирается
+    if (getValue !== '0' && outputArr[0] === '0') {        
+        outputArr.pop();
+
+        outputArr.push(getValue);
+        getOutputValue(outputArr);
+        return;
+    }
+
+    // Добавляет запятую при нажатии
+    if (getValue === 'dot') {
+        if (outputArr.length === 0) {
+            outputArr.push('0.');
+            getOutputValue(outputArr);
+            return;
+        }
+
+        const isDotAvailible = outputString.includes('.');
+        console.log(isDotAvailible);
+        console.log(outputString);
+
+        if (isDotAvailible) {
+            return;
+        }
+
+        outputArr.push('.');
+        getOutputValue(outputArr);
+        return;
+    }
+
+    // Добавляет в исходный массив нажатый элемент
     outputArr.push(getValue);
+    console.log(getValue);
 
-    let outputString = outputArr.join('');
-    firstInputNode.value = outputString;
+    // Функция вывода значения в инпут
+    getOutputValue(outputArr);
 }
 
 
