@@ -202,6 +202,43 @@ function inputEventListener(index) {
             arrOfInput[secondInputIndex].value = result;
             return;
         }
+    } else if (arrOfSelect[index].value === 'JPY') { // 5. Расчет первого инпута: ЙЕНА
+        if (arrOfSelect[secondInputIndex].value === 'USD') {
+            // Результат
+            let result = isInteger(getSum / dollar_JPY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+            // Результат
+            let result = isInteger(getSum * dollar_Ruble / dollar_JPY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+            // Результат
+            let result = isInteger((getSum * dollar_Euro) / dollar_JPY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+            // Результат
+            let result = isInteger((getSum * dollar_СNY) / dollar_JPY );
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else {
+            // Результат
+            let result = getSum;
+
+            // Выводит результат в нужный инпут           
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        }
     }
 
 }
