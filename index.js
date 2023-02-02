@@ -252,10 +252,36 @@ secondInputNode.addEventListener('input', (() => inputEventListener(1)));
 const converterList = document.querySelector('.converter__list');
 
 
-function getNumber() {
+let outputArr = [];
+function getNumber(e) {
+    console.log(e.target.id);
+    // Получает нажатое значение
+    let getValue = e.target.id;
 
+    // Удаляет значение при нажатии на кнопку del
+    if (getValue === 'del') {
+        if (outputArr === []) {
+            console.log("пустой массив")
+            return;
+        }
+        console.log('Удалить');
+        outputArr.pop();
+
+        console.log(outputArr);
+
+
+        let outputString = outputArr.join('');
+        firstInputNode.value = outputString;
+        return;
+    }
+
+
+    outputArr.push(getValue);
+
+    let outputString = outputArr.join('');
+    firstInputNode.value = outputString;
 }
 
 
 // Слушатель на нажатие на кнопки
-converterList.addEventListener('click', getNumber)
+converterList.addEventListener('click',((e) => getNumber(e)));
