@@ -34,7 +34,6 @@ function inputEventListener(index) {
     // Введенное значение
     let getSum = arrOfInput[index].value;
 
-
     // Проверка целое ли число
     function isInteger(x) {
         if (Number.isInteger(x)) {
@@ -226,7 +225,7 @@ function inputEventListener(index) {
             return;
         } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
             // Результат
-            let result = isInteger((getSum * dollar_СNY) / dollar_JPY );
+            let result = isInteger((getSum * dollar_СNY) / dollar_JPY);
 
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
@@ -247,6 +246,29 @@ firstInputNode.addEventListener('input', (() => inputEventListener(0)));
 secondInputNode.addEventListener('input', (() => inputEventListener(1)));
 
 
+
+
+// Вывод резульатат 
+const converterOutput = document.querySelector('.converter__output');
+
+let idFocusInput;
+let newIdFocusInput;
+// Определяет какой инпут нажат
+converterOutput.addEventListener("focusin", (e) => {    
+    idFocusInput = e.target.id;
+
+    if (idFocusInput !== newIdFocusInput) {
+        console.log('разные');
+    }
+
+    newIdFocusInput = idFocusInput;
+    // console.log(`Инпут: ${idFocusInput}`);
+    // console.log(`Инпут: ${newIdFocusInput}`);
+});
+
+console.log(newIdFocusInput);
+
+
 // Нода списка кнопок
 const converterList = document.querySelector('.converter__list');
 
@@ -254,8 +276,19 @@ const converterList = document.querySelector('.converter__list');
 let outputArr = [];
 // Массив outputArr преобразованный в строку
 let outputString = '';
+
 function getNumber(e) {
-    console.log(e.target.id);
+    // Если инпут не нажат, то ввод не происходит
+    if (!idFocusInput) {
+        return;
+    }
+
+    // let newIdFocusInput = idFocusInput;
+    // console.log(`Инпут: ${newIdFocusInput}`);
+
+    // Масиив инпутов
+    let arrOfInput = [firstInputNode, secondInputNode];
+
     // Получает нажатое значение
     let getValue = e.target.id;
 
@@ -263,7 +296,7 @@ function getNumber(e) {
     // Выводит значение в инпут 
     function getOutputValue(outputArr) {
         outputString = outputArr.join('');
-        firstInputNode.value = outputString;
+        arrOfInput[idFocusInput].value = outputString;
     }
 
     // Удаляет значение при нажатии на кнопку del
@@ -283,10 +316,10 @@ function getNumber(e) {
     // Проверка если первое число 0, то нельзя ввести 0
     if (getValue === '0' && outputArr[0] === '0') {
         return;
-    } 
+    }
 
     // Проверка если первое число 0, и вводят другое число, то ноль стирается
-    if (getValue !== '0' && outputArr[0] === '0') {        
+    if (getValue !== '0' && outputArr[0] === '0') {
         outputArr.pop();
 
         outputArr.push(getValue);
@@ -321,8 +354,10 @@ function getNumber(e) {
 
     // Функция вывода значения в инпут
     getOutputValue(outputArr);
+
 }
 
 
 // Слушатель на нажатие на кнопки
-converterList.addEventListener('click',((e) => getNumber(e)));
+converterList.addEventListener('click', ((e) => getNumber(e)));
+
