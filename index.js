@@ -253,9 +253,9 @@ const converterList = document.querySelector('.converter__list');
 
 
 function getNumber() {
-    
+
 }
 
 
-
+// Слушатель на нажатие на кнопки
 converterList.addEventListener('click', getNumber)
