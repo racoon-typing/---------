@@ -250,53 +250,55 @@ secondInputNode.addEventListener('input', (() => inputEventListener(1)));
 
 // Вывод резульатат 
 const converterOutput = document.querySelector('.converter__output');
-
 let idFocusInput;
-let newIdFocusInput;
-// Определяет какой инпут нажат
-converterOutput.addEventListener("focusin", (e) => {    
-    idFocusInput = e.target.id;
-
-    if (idFocusInput !== newIdFocusInput) {
-        console.log('разные');
-    }
-
-    newIdFocusInput = idFocusInput;
-    // console.log(`Инпут: ${idFocusInput}`);
-    // console.log(`Инпут: ${newIdFocusInput}`);
-});
-
-console.log(newIdFocusInput);
-
-
 // Нода списка кнопок
 const converterList = document.querySelector('.converter__list');
+
 
 // Массив с введенными данными
 let outputArr = [];
 // Массив outputArr преобразованный в строку
 let outputString = '';
+// Масиив инпутов
+let arrOfInput = [firstInputNode, secondInputNode];
 
+
+// Определяет какой инпут нажат
+function getInputId(e) {
+    idFocusInput = e.target.id;
+    console.log(idFocusInput);
+
+    // Стирает значение при фокусе на друом инпут
+    if (idFocusInput === '0') {
+        outputArr = [];
+        arrOfInput[1].value = '';
+    } else {
+        outputArr = [];
+        arrOfInput[0].value = '';
+    }
+
+    return;
+}
+
+// Слуаштель на инпут
+converterOutput.addEventListener("focusin", ((e) => getInputId(e)));
+
+
+// Функция отражает нажатую клавишу
 function getNumber(e) {
     // Если инпут не нажат, то ввод не происходит
     if (!idFocusInput) {
         return;
     }
 
-    // let newIdFocusInput = idFocusInput;
-    // console.log(`Инпут: ${newIdFocusInput}`);
-
-    // Масиив инпутов
-    let arrOfInput = [firstInputNode, secondInputNode];
-
     // Получает нажатое значение
     let getValue = e.target.id;
-
 
     // Выводит значение в инпут 
     function getOutputValue(outputArr) {
         outputString = outputArr.join('');
         arrOfInput[idFocusInput].value = outputString;
+        console.log(outputString);
     }
 
     // Удаляет значение при нажатии на кнопку del
@@ -355,6 +357,9 @@ function getNumber(e) {
     // Функция вывода значения в инпут
     getOutputValue(outputArr);
 
+    // Функция расчета курса
+    inputEventListener(idFocusInput);
+    console.log(idFocusInput);
 }
 
 
