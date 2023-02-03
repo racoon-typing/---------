@@ -402,5 +402,44 @@ toggleWrapper.addEventListener('click', (e) => {
         firstInputNode.readOnly = true;
         secondInputNode.readOnly = true;
     }
-
 });
+
+
+
+// Нода селекта
+const firstSelect = document.querySelector('.converter__output-select--fisrt');
+const secondSelect = document.querySelector('.converter__output-select--second');
+const flagsNode = document.querySelectorAll('.converter__output-flag');
+
+// Объект с картинками флагов
+const imgFlag = {
+    USD: 'img/usa.png',
+    RUB: 'img/russia.png',
+    EUR: 'img/evro.png',
+    CNY: 'img/china.png',
+    JPY: 'img/japan.jpeg'
+}
+
+// Функция замены флага
+function getFlag(e) {
+    const selectValue = e.target.value;
+    const selectId = Number(e.target.id);
+    console.log(selectValue);
+    console.log(typeof selectId);
+
+    if (selectValue === 'USD') {
+        flagsNode[selectId].src = imgFlag.USD;
+        console.log(flagsNode[selectId].src);
+    } else if (selectValue === 'RUB') {
+        flagsNode[selectId].src = imgFlag.RUB;
+    } else if (selectValue === 'EUR') {
+        flagsNode[selectId].src = imgFlag.EUR;
+    } else if (selectValue === 'CNY') {
+        flagsNode[selectId].src = imgFlag.CNY;
+    } else {
+        flagsNode[selectId].src = imgFlag.JPY;
+    }
+}
+
+firstSelect.addEventListener('change', (e) => getFlag(e));
+secondSelect.addEventListener('change', (e) => getFlag(e));
