@@ -273,10 +273,12 @@ function getInputId(e) {
     // Стирает значение при фокусе на друом инпут
     if (idFocusInput === '0') {
         outputArr = [];
+        arrOfInput[0].value = '';
         arrOfInput[1].value = '';
     } else {
         outputArr = [];
         arrOfInput[0].value = '';
+        arrOfInput[1].value = '';
     }
 
     return;
@@ -376,6 +378,7 @@ const toggleButton1 = document.querySelector('.toggle__button-1');
 const toggleButton2 = document.querySelector('.toggle__button-2');
 const main = document.querySelector('.main');
 
+
 const arrOfButton = [toggleButton1, toggleButton2];
 
 toggleWrapper.addEventListener('click', (e) => {
@@ -388,12 +391,16 @@ toggleWrapper.addEventListener('click', (e) => {
         toggleButton2.style.display = "block";
         main.style.justifyContent = "flex-start";
         main.style.paddingTop = "118px";
+        firstInputNode.readOnly = false;
+        secondInputNode.readOnly = false;
     } else {
         converterList.style.display = "grid";
         toggleButton1.style.display = "block";
         toggleButton2.style.display = "none";
         main.style.justifyContent = "center";
         main.style.paddingTop = "20px";
+        firstInputNode.readOnly = true;
+        secondInputNode.readOnly = true;
     }
 
 });
