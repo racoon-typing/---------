@@ -13,9 +13,11 @@ const secondInputNode = document.querySelector('.converter__input--second');
 
 // Функция расчета курса для первого инпута
 function inputEventListener(index) {
+    console.log(index);
+
     let secondInputIndex;
 
-    if (index === 0) {
+    if (index === '0') {
         secondInputIndex = 1;
     } else {
         secondInputIndex = 0;
@@ -242,8 +244,8 @@ function inputEventListener(index) {
 }
 
 // Слушатели на Инпуте
-firstInputNode.addEventListener('input', (() => inputEventListener(0)));
-secondInputNode.addEventListener('input', (() => inputEventListener(1)));
+firstInputNode.addEventListener('input', (() => inputEventListener('0')));
+secondInputNode.addEventListener('input', (() => inputEventListener('1')));
 
 
 
