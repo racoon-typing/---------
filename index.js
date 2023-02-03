@@ -368,3 +368,32 @@ function getNumber(e) {
 // Слушатель на нажатие на кнопки
 converterList.addEventListener('click', ((e) => getNumber(e)));
 
+
+
+
+const toggleWrapper = document.querySelector('.toggle');
+const toggleButton1 = document.querySelector('.toggle__button-1');
+const toggleButton2 = document.querySelector('.toggle__button-2');
+const main = document.querySelector('.main');
+
+const arrOfButton = [toggleButton1, toggleButton2];
+
+toggleWrapper.addEventListener('click', (e) => {
+    console.log(e.target.id);
+    let idButton = e.target.id;
+
+    if (idButton === '0') {
+        converterList.style.display = "none";
+        toggleButton1.style.display = "none";
+        toggleButton2.style.display = "block";
+        main.style.justifyContent = "flex-start";
+        main.style.paddingTop = "118px";
+    } else {
+        converterList.style.display = "grid";
+        toggleButton1.style.display = "block";
+        toggleButton2.style.display = "none";
+        main.style.justifyContent = "center";
+        main.style.paddingTop = "20px";
+    }
+
+});
