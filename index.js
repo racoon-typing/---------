@@ -368,7 +368,7 @@ function getInputId(e) {
     return;
 }
 
-// Слушатель на инпут
+// Слушатель на нажатый инпут
 converterOutput.addEventListener("focusin", ((e) => getInputId(e)));
 
 
