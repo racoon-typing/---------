@@ -25,6 +25,10 @@
     padding: 20px;
 }
 
+.main__wrapper {
+    max-width: 500px;
+}
+
 .main__title {
     margin: 0;
     font-size: 18px;
@@ -33,7 +37,6 @@
 
 .converter {
     width: 100%;
-    max-width: 500px;
 }
 
 .converter__output {

@@ -203,7 +203,7 @@ function inputEventListener(index) {
             arrOfInput[secondInputIndex].value = result;
             return;
         }
-    } else if (arrOfSelect[index].value === 'JPY') { // 5. Расчет первого инпута: ЙЕНА
+    } else if (arrOfSelect[index].value === 'JPY') { // 5. Расчет первого инпута: ИЕНА
         if (arrOfSelect[secondInputIndex].value === 'USD') {
             // Результат
             let result = isInteger(getSum / dollar_JPY);
@@ -372,7 +372,7 @@ converterList.addEventListener('click', ((e) => getNumber(e)));
 
 
 
-
+// Пернключение клавиатуры
 const toggleWrapper = document.querySelector('.toggle');
 const toggleButton1 = document.querySelector('.toggle__button-1');
 const toggleButton2 = document.querySelector('.toggle__button-2');
@@ -413,33 +413,127 @@ const flagsNode = document.querySelectorAll('.converter__output-flag');
 
 // Объект с картинками флагов
 const imgFlag = {
-    USD: 'img/usa.png',
-    RUB: 'img/russia.png',
-    EUR: 'img/evro.png',
-    CNY: 'img/china.png',
-    JPY: 'img/japan.jpeg'
-}
-
-// Функция замены флага
-function getFlag(e) {
-    const selectValue = e.target.value;
-    const selectId = Number(e.target.id);
-    console.log(selectValue);
-    console.log(typeof selectId);
-
-    if (selectValue === 'USD') {
-        flagsNode[selectId].src = imgFlag.USD;
-        console.log(flagsNode[selectId].src);
-    } else if (selectValue === 'RUB') {
-        flagsNode[selectId].src = imgFlag.RUB;
-    } else if (selectValue === 'EUR') {
-        flagsNode[selectId].src = imgFlag.EUR;
-    } else if (selectValue === 'CNY') {
-        flagsNode[selectId].src = imgFlag.CNY;
-    } else {
-        flagsNode[selectId].src = imgFlag.JPY;
+    USD: {
+        img: 'img/usa.png',
+        description: 'Доллар США',
+    },
+    RUB: {
+        img: 'img/russia.png',
+        description: 'Российский рубль',
+    },
+    EUR: {
+        img: 'img/evro.png',
+        description: 'Евро',
+    },
+    CNY: {
+        img: 'img/china.png',
+        description: 'Китайский юань',
+    },
+    JPY: {
+        img: 'img/japan.jpeg',
+        description: 'Японская иена',
     }
 }
 
+// Нода описания валюты
+const outputDescriptionFirst = document.querySelector('.converter__output-description--first');
+const outputDescriptionSecond = document.querySelector('.converter__output-description--second');
+
+// Массив с нодами описания валюты
+const arrOfDescriptionNode = [outputDescriptionFirst, outputDescriptionSecond];
+
+
+// Функция замены флага
+function getFlag(e) {
+    let selectValue = e.target.value;
+    let selectId = Number(e.target.id);
+
+    console.log(selectValue);
+    console.log(selectId);
+
+    if (selectValue === 'USD') {
+        flagsNode[selectId].src = imgFlag.USD.img;
+        arrOfDescriptionNode[selectId].textContent = imgFlag.USD.description;
+    } else if (selectValue === 'RUB') {
+        flagsNode[selectId].src = imgFlag.RUB.img;
+        arrOfDescriptionNode[selectId].textContent = imgFlag.RUB.description;
+    } else if (selectValue === 'EUR') {
+        flagsNode[selectId].src = imgFlag.EUR.img;
+        arrOfDescriptionNode[selectId].textContent = imgFlag.EUR.description;
+    } else if (selectValue === 'CNY') {
+        flagsNode[selectId].src = imgFlag.CNY.img;
+        arrOfDescriptionNode[selectId].textContent = imgFlag.CNY.description;
+    } else {
+        flagsNode[selectId].src = imgFlag.JPY.img;
+        arrOfDescriptionNode[selectId].textContent = imgFlag.JPY.description;
+    }
+}
+
+// Слушатель на селект
 firstSelect.addEventListener('change', (e) => getFlag(e));
 secondSelect.addEventListener('change', (e) => getFlag(e));
+
+
+// Поменять валюты
+const buttonCross = document.querySelector('.converter__output-img');
+
+
+function crossValue() {
+    // Значение селекта
+    const selectNodeValue1 = firstSelect.value;
+    const selectNodeValue2 = secondSelect.value;
+    const arrCrossSelect = [selectNodeValue1, selectNodeValue2];
+
+    // Значение инпута
+    const inputNodeValue1 = firstInputNode.value;
+    const inputNodeValue2 = secondInputNode.value;
+    const arrCrossInput = [inputNodeValue1, inputNodeValue2];
+    
+    // Значение описания
+    const descriptionNodeValue1 = outputDescriptionFirst.textContent;
+    const descriptionNodeValue2 = outputDescriptionSecond.textContent;
+    const arrCrossDescription = [descriptionNodeValue1, descriptionNodeValue2];
+    console.log(arrCrossDescription);
+
+
+    // Меняем местами 
+    // 1
+    arrCrossSelect[0] = selectNodeValue2;
+    arrCrossSelect[1] = selectNodeValue1;
+    // 2
+    arrCrossInput[0] = inputNodeValue2;
+    arrCrossInput[1] = inputNodeValue1;
+    // 3
+    arrCrossDescription[0] = descriptionNodeValue2;
+    arrCrossDescription[1] = descriptionNodeValue1;
+
+
+    // Выводим результат
+    // 1
+    firstSelect.value = arrCrossSelect[0];
+    secondSelect.value = arrCrossSelect[1];
+    // 2
+    firstInputNode.value = arrCrossInput[0];
+    secondInputNode.value = arrCrossInput[1];
+    // 3
+    outputDescriptionFirst.textContent = arrCrossDescription[0];
+    outputDescriptionSecond.textContent = arrCrossDescription[1];
+
+
+
+    // selectValue = firstSelect.value;
+
+    // // Нода селекта
+    // const firstSelect = document.querySelector('.converter__output-select--fisrt');
+    // const secondSelect = document.querySelector('.converter__output-select--second');
+
+
+
+
+    // Функция замены флага
+    // firstSelect.addEventListener('input', (e) => getFlag(e));
+    // secondSelect.addEventListener('input', (e) => getFlag(e));
+}
+
+buttonCross.addEventListener('click', crossValue);
+
