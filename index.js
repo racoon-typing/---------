@@ -1,8 +1,8 @@
-// Курс
+// Курс валют
 const dollar_Ruble = 69.88;
 const dollar_Euro = 0.92;
 const dollar_СNY = 6.74;
-const dollar_GBP = 0.81;
+const dollar_GBP = 0.83;
 const dollar_JPY = 129.72;
 
 
@@ -84,6 +84,13 @@ function inputEventListener(index) {
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
             return;
+        } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
+            // Результат
+            let result = isInteger(getSum * dollar_GBP);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
         } else {
             // Результат
             let result = getSum;
@@ -117,6 +124,13 @@ function inputEventListener(index) {
         } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
             // Результат
             let result = isInteger(getSum / dollar_Ruble * dollar_JPY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'GBP') { 
+            // Результат
+            let result = isInteger((getSum * dollar_GBP) / dollar_Ruble);
 
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
@@ -158,6 +172,13 @@ function inputEventListener(index) {
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
             return;
+        } else if (arrOfSelect[secondInputIndex].value === 'GBP') { 
+            // Результат
+            let result = isInteger((getSum * dollar_GBP) / dollar_Euro);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
         } else {
             // Результат
             let result = getSum;
@@ -195,6 +216,13 @@ function inputEventListener(index) {
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
             return;
+        } else if (arrOfSelect[secondInputIndex].value === 'GBP') { 
+            // Результат
+            let result = isInteger((getSum * dollar_GBP) / dollar_СNY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
         } else {
             // Результат
             let result = getSum;
@@ -228,6 +256,57 @@ function inputEventListener(index) {
         } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
             // Результат
             let result = isInteger((getSum * dollar_СNY) / dollar_JPY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'GBP') { 
+            // Результат
+            let result = isInteger((getSum * dollar_GBP) / dollar_JPY);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        }else {
+            // Результат
+            let result = getSum;
+
+            // Выводит результат в нужный инпут           
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        }
+    } else if (arrOfSelect[index].value === 'GBP') { // 6. Расчет первого инпута: ФУНТ СТЕРЛИНГОВ
+        if (arrOfSelect[secondInputIndex].value === 'USD') {
+            // Результат
+            let result = isInteger(getSum / dollar_GBP);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+            // Результат
+            let result = isInteger(getSum * dollar_Ruble / dollar_GBP);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+            // Результат
+            let result = isInteger((getSum * dollar_Euro) / dollar_GBP);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+            // Результат
+            let result = isInteger((getSum * dollar_СNY) / dollar_GBP);
+
+            // Выводит результат в нужный инпут
+            arrOfInput[secondInputIndex].value = result;
+            return;
+        } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
+            // Результат
+            let result = isInteger((getSum * dollar_JPY) / dollar_GBP);
 
             // Выводит результат в нужный инпут
             arrOfInput[secondInputIndex].value = result;
@@ -372,7 +451,7 @@ converterList.addEventListener('click', ((e) => getNumber(e)));
 
 
 
-// Пернключение клавиатуры
+// Переключение клавиатуры
 const toggleWrapper = document.querySelector('.toggle');
 const toggleButton1 = document.querySelector('.toggle__button-1');
 const toggleButton2 = document.querySelector('.toggle__button-2');
@@ -432,6 +511,10 @@ const imgFlag = {
     JPY: {
         img: 'img/japan.jpeg',
         description: 'Японская иена',
+    },
+    GBP: {
+        img: 'img/gbp.png',
+        description: ' Фунт стрелингов',
     }
 }
 
@@ -463,7 +546,10 @@ function getFlag(e) {
     } else if (selectValue === 'CNY') {
         flagsNode[selectId].src = imgFlag.CNY.img;
         arrOfDescriptionNode[selectId].textContent = imgFlag.CNY.description;
-    } else {
+    } else if (selectValue === 'GBP') {
+        flagsNode[selectId].src = imgFlag.GBP.img;
+        arrOfDescriptionNode[selectId].textContent = imgFlag.GBP.description;
+    }else {
         flagsNode[selectId].src = imgFlag.JPY.img;
         arrOfDescriptionNode[selectId].textContent = imgFlag.JPY.description;
     }
@@ -477,7 +563,7 @@ secondSelect.addEventListener('change', (e) => getFlag(e));
 // Поменять валюты
 const buttonCross = document.querySelector('.converter__output-img');
 
-
+// Функция быстрой смены валюты
 function crossValue() {
     // Значение селекта
     const selectNodeValue1 = firstSelect.value;
@@ -488,13 +574,16 @@ function crossValue() {
     const inputNodeValue1 = firstInputNode.value;
     const inputNodeValue2 = secondInputNode.value;
     const arrCrossInput = [inputNodeValue1, inputNodeValue2];
-    
+
     // Значение описания
     const descriptionNodeValue1 = outputDescriptionFirst.textContent;
     const descriptionNodeValue2 = outputDescriptionSecond.textContent;
     const arrCrossDescription = [descriptionNodeValue1, descriptionNodeValue2];
-    console.log(arrCrossDescription);
 
+    // Значение описания
+    const flagNodeValue1 = document.querySelector('.converter__output-flag--first');
+    const flagNodeValue2 = document.querySelector('.converter__output-flag--second');
+    const arrCrossFlag = [flagNodeValue1.src, flagNodeValue2.src];
 
     // Меняем местами 
     // 1
@@ -506,7 +595,9 @@ function crossValue() {
     // 3
     arrCrossDescription[0] = descriptionNodeValue2;
     arrCrossDescription[1] = descriptionNodeValue1;
-
+    // 4
+    arrCrossFlag[0] = flagNodeValue2.src;
+    arrCrossFlag[1] = flagNodeValue1.src;
 
     // Выводим результат
     // 1
@@ -518,21 +609,9 @@ function crossValue() {
     // 3
     outputDescriptionFirst.textContent = arrCrossDescription[0];
     outputDescriptionSecond.textContent = arrCrossDescription[1];
-
-
-
-    // selectValue = firstSelect.value;
-
-    // // Нода селекта
-    // const firstSelect = document.querySelector('.converter__output-select--fisrt');
-    // const secondSelect = document.querySelector('.converter__output-select--second');
-
-
-
-
-    // Функция замены флага
-    // firstSelect.addEventListener('input', (e) => getFlag(e));
-    // secondSelect.addEventListener('input', (e) => getFlag(e));
+    // 4
+    flagNodeValue1.src = arrCrossFlag[0];
+    flagNodeValue2.src = arrCrossFlag[1];
 }
 
 buttonCross.addEventListener('click', crossValue);
