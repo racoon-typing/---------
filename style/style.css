@@ -44,11 +44,20 @@
     margin-bottom: 30px;
 }
 
+.converter__output--weight {
+    display: none;
+}
+
 .converter__output-content {
     display: grid;
     grid-template-columns: 60px 140px 1fr;
     padding-right: 20px;
     align-items: center;
+}
+
+.converter__output-content--weight {
+    display: flex;
+    justify-content: space-between;
 }
 
 .converter__output-img {
@@ -107,6 +116,10 @@
     color: var(--color-main);
     text-align: end;
     font-size: 18px;
+}
+
+.converter__input--weight {
+    width: 200px;
 }
 
 .converter__input::placeholder {

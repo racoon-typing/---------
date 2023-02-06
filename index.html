@@ -13,14 +13,14 @@
     <main class="main">
         <div class="main__wrapper">
             <h1 class="main__title">
-                Конвертер: 
+                Конвертер:
                 <span class="converter__name">
                     валют
                 </span>
             </h1>
 
-
             <div class="converter">
+                <!-- Конвертер валют -->
                 <div class="converter__output">
                     <div class="converter__output-content converter__output-content--first">
                         <div class="converter__output-flag-wrapper">
@@ -51,6 +51,7 @@
                         <input class="converter__input converter__input--first" type="number" name="" id="0"
                             placeholder="0" readonly>
                     </div>
+
 
                     <div class="converter__output-img">
                         <svg class="converter__img" role="img" focusable="false" aria-hidden="true"
@@ -93,6 +94,66 @@
                     </div>
                 </div>
 
+
+                <!-- Конвертер мер веса -->
+                <div class="converter__output converter__output--weight">
+                    <div class="converter__output-content converter__output-content--weight converter__output-content--third">
+                        <div class="converter__output-currency">
+                            <select name="" id="0" class="converter__output-select converter__output-select--third">
+                                <!-- 1 -->
+                                <option value="kg">Килограмм</option>
+                                <!-- 2 -->
+                                <option value="g">Грамм</option>
+                                <!-- 3 -->
+                                <option value="мг">Миллиграмм</option>
+                                <!-- 4 -->
+                                <option value="µg">Микрограмм</option>
+                                <!-- 5 -->
+                                <option value="q">Центнер</option>
+                                <!-- 6 -->
+                                <option value="t">Тонна</option>
+                            </select>
+                        </div>
+
+                        <input class="converter__input converter__input--weight converter__input--third" type="number" name="" id="0"
+                            placeholder="0" readonly>
+                    </div>
+
+
+                    <div class="converter__output-img">
+                        <svg class="converter__img" role="img" focusable="false" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                            <path
+                                d="m 1,4.9375637 0,-0.375 c 0,-0.31066 0.2518359,-0.5625 0.5625,-0.5625 l 8.4375,0 0,-1.125 c 0,-0.50079 0.607008,-0.75098 0.960258,-0.39776 l 1.875,1.875 c 0.219656,0.21968 0.219656,0.57584 0,0.79549 l -1.875,1.875 C 10.608344,7.3746437 10,7.1279437 10,6.6250637 l 0,-1.125 -8.4375,0 C 1.2518359,5.5000637 1,5.2482237 1,4.9375637 Z m 11.4375,3.5625 -8.4375,0 0,-1.125 c 0,-0.49955 -0.6061406,-0.75187 -0.9602578,-0.39776 l -1.875,1.875 c -0.21965626,0.21968 -0.21965626,0.57584 0,0.79549 l 1.875,1.8750003 C 3.3919609,11.874994 4,11.627494 4,11.125064 l 0,-1.125 8.4375,0 C 12.748164,10.000064 13,9.7482237 13,9.4375637 l 0,-0.375 c 0,-0.31066 -0.251836,-0.5625 -0.5625,-0.5625 z" />
+                        </svg>
+                    </div>
+
+
+                    <div class="converter__output-content converter__output-content--weight converter__output-content--fourth">
+                        <div class="converter__output-currency">
+                            <select name="" id="1" class="converter__output-select converter__output-select--fourth">
+                                <!-- 1 -->
+                                <option value="g">Грамм</option>
+                                <!-- 2 -->
+                                <option value="kg">Килограмм</option>
+                                <!-- 3 -->
+                                <option value="мг">Миллиграмм</option>
+                                <!-- 4 -->
+                                <option value="µg">Микрограмм</option>
+                                <!-- 5 -->
+                                <option value="q">Центнер</option>
+                                <!-- 6 -->
+                                <option value="t">Тонна</option>
+                            </select>
+                        </div>
+
+                        <input class="converter__input converter__input--weight converter__input--fourth" type="number" name="" id="1"
+                            placeholder="0" readonly>
+                    </div>
+                </div>
+
+
+                <!-- Клавиатура -->
                 <ul class="converter__list">
                     <!-- 1 -->
                     <li class="converter__item">
@@ -180,6 +241,8 @@
                 </ul>
             </div>
 
+
+
             <div class="toggle">
                 <button type="button" class="toggle__button toggle__button-1" id="0">Пользовательская
                     клавиатруа</button>
@@ -188,8 +251,9 @@
         </div>
     </main>
 
-
+    <script src="js/service.js"></script>
     <script src="index.js"></script>
+
 </body>
 
 </html>
