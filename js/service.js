@@ -1,3 +1,54 @@
+// Список с кнопками: Попап
+const popupMenu = document.querySelector('.main__popup');
+const menuListNode = document.querySelector('.main__popup-list');
+const converterMoney = document.querySelector('.converter__output--money');
+const converterWeight = document.querySelector('.converter__output--weight');
+// Название конвертора
+const converterName = document.querySelector('.converter__name');
+
+const converterNameText = ['валют', 'веса', 'длины']
+
+
+
+
+// Слушатель на кнопки показа конверторов
+menuListNode.addEventListener('click', (e) => {
+    let buttonCalculate = e.target.id;
+
+    function hideMenu(button) {
+        popupMenu.style.display = "none";
+
+        if (button === '0') {
+            converterMoney.style.display = "block";
+            converterWeight.style.display = "none"
+
+            converterName.textContent = converterNameText[0];
+            return;
+        } else if (button === '1') {
+            converterMoney.style.display = "none";
+            converterWeight.style.display = "flex"
+
+            converterName.textContent = converterNameText[1];
+            return;
+        } else {
+            return;
+        }
+    }
+
+    hideMenu(buttonCalculate);
+    console.log(buttonCalculate);
+});
+
+const buttonMenu = document.querySelector('.button-menu');
+
+buttonMenu.addEventListener('click', () => {
+    popupMenu.style.display = "flex";
+});
+
+
+
+
+
 // Поменять валюты
 const buttonCross = document.querySelector('.converter__output-img');
 
@@ -60,27 +111,27 @@ buttonCross.addEventListener('click', crossValue);
 // Объект с картинками флагов
 const imgFlag = {
     USD: {
-        img: 'img/usa.png',
+        img: 'img/flags/usa.png',
         description: 'Доллар США',
     },
     RUB: {
-        img: 'img/russia.png',
+        img: 'img/flags/russia.png',
         description: 'Российский рубль',
     },
     EUR: {
-        img: 'img/evro.png',
+        img: 'img/flags/evro.png',
         description: 'Евро',
     },
     CNY: {
-        img: 'img/china.png',
+        img: 'img/flags/china.png',
         description: 'Китайский юань',
     },
     JPY: {
-        img: 'img/japan.jpeg',
+        img: 'img/flags/japan.jpeg',
         description: 'Японская иена',
     },
     GBP: {
-        img: 'img/gbp.png',
+        img: 'img/flags/gbp.png',
         description: ' Фунт стрелингов',
     }
 }
@@ -150,7 +201,7 @@ toggleWrapper.addEventListener('click', (e) => {
         toggleButton1.style.display = "none";
         toggleButton2.style.display = "block";
         main.style.justifyContent = "flex-start";
-        main.style.paddingTop = "118px";
+        main.style.paddingTop = "142px";
         firstInputNode.readOnly = false;
         secondInputNode.readOnly = false;
     } else {

@@ -12,6 +12,13 @@
 <body class="page__body">
     <main class="main">
         <div class="main__wrapper">
+            <button class="button-menu" type="button">
+                <span class="button-menu__line"></span>
+                <span class="button-menu__line"></span>
+                <span class="button-menu__line button-menu__line-noMargin"></span>
+            </button>
+
+
             <h1 class="main__title">
                 Конвертер:
                 <span class="converter__name">
@@ -21,10 +28,10 @@
 
             <div class="converter">
                 <!-- Конвертер валют -->
-                <div class="converter__output">
+                <div class="converter__output converter__output--money">
                     <div class="converter__output-content converter__output-content--first">
                         <div class="converter__output-flag-wrapper">
-                            <img src="img/usa.png" alt="" class="converter__output-flag converter__output-flag--first">
+                            <img src="img/flags/usa.png" alt="" class="converter__output-flag converter__output-flag--first">
                         </div>
 
                         <div class="converter__output-currency">
@@ -64,7 +71,7 @@
 
                     <div class="converter__output-content converter__output-content--second">
                         <div class="converter__output-flag-wrapper">
-                            <img src="img/russia.png" alt=""
+                            <img src="img/flags/russia.png" alt=""
                                 class="converter__output-flag converter__output-flag--second">
                         </div>
 
@@ -249,10 +256,37 @@
                 <button type="button" class="toggle__button toggle__button-2" id="1">Стандартная клавиатруа</button>
             </div>
         </div>
+
+        
+        <!-- Попап -->
+        <div class="main__popup">
+
+            <h2 class="main__popup-title">
+                Нажмите на кнопку, чтобы выбрать конвертер:
+            </h2>
+
+            <ul class="main__popup-list">
+                <!-- 1 -->
+                <li class="main__popup-item">
+                    <img class="main__popup-item-img" src="img/icon/money.png" alt="" id="0">
+                </li>
+
+                <!-- 2 -->
+                <li class="main__popup-item">
+                    <img class="main__popup-item-img" src="img/icon/weight.png" alt="" id="1">
+                </li>
+
+                <!-- 3 -->
+                <li class="main__popup-item">
+                    <img class="main__popup-item-img" src="img/icon/length.png" alt="" id="2">
+                </li>
+            </ul>
+        </div>
+
     </main>
 
     <script src="js/service.js"></script>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
 
 </body>
 
