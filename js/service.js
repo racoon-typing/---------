@@ -1,52 +1,11 @@
 // Список с кнопками: Попап
 const popupMenu = document.querySelector('.main__popup');
-const menuListNode = document.querySelector('.main__popup-list');
-const converterMoney = document.querySelector('.converter__output--money');
-const converterWeight = document.querySelector('.converter__output--weight');
-// Название конвертора
-const converterName = document.querySelector('.converter__name');
-
-const converterNameText = ['валют', 'веса', 'длины']
-
-
-
-
-// Слушатель на кнопки показа конверторов
-menuListNode.addEventListener('click', (e) => {
-    let buttonCalculate = e.target.id;
-
-    function hideMenu(button) {
-        popupMenu.style.display = "none";
-
-        if (button === '0') {
-            converterMoney.style.display = "block";
-            converterWeight.style.display = "none"
-
-            converterName.textContent = converterNameText[0];
-            return;
-        } else if (button === '1') {
-            converterMoney.style.display = "none";
-            converterWeight.style.display = "flex"
-
-            converterName.textContent = converterNameText[1];
-            return;
-        } else {
-            return;
-        }
-    }
-
-    hideMenu(buttonCalculate);
-    console.log(buttonCalculate);
-});
-
 const buttonMenu = document.querySelector('.button-menu');
 
+// Показать меню
 buttonMenu.addEventListener('click', () => {
     popupMenu.style.display = "flex";
 });
-
-
-
 
 
 // Поменять валюты
@@ -193,7 +152,7 @@ const main = document.querySelector('.main');
 const arrOfButton = [toggleButton1, toggleButton2];
 
 toggleWrapper.addEventListener('click', (e) => {
-    console.log(e.target.id);
+    // console.log(e.target.id);
     let idButton = e.target.id;
 
     if (idButton === '0') {

@@ -10,12 +10,116 @@ const dollar_JPY = 129.72;
 // 1. Валюта
 const firstInputNode = document.querySelector('.converter__input--first');
 const secondInputNode = document.querySelector('.converter__input--second');
+// Нода селекта
+// const firstSelect = document.querySelector('.converter__output-select--fisrt');
+// const secondSelect = document.querySelector('.converter__output-select--second');
+
+
 
 // 2. Вес
 const thirdInputNode = document.querySelector('.converter__input--third');
 const fourthInputNode = document.querySelector('.converter__input--fourth');
+// Нода селекта
+const thirdSelect = document.querySelector('.converter__output-select--third');
+const fourthSelect = document.querySelector('.converter__output-select--fourth');
 
 
+
+// Список с кнопками: Попап
+// const popupMenu = document.querySelector('.main__popup');
+const menuListNode = document.querySelector('.main__popup-list');
+const converterMoney = document.querySelector('.converter__output--money');
+const converterWeight = document.querySelector('.converter__output--weight');
+// Название конвертора
+const converterName = document.querySelector('.converter__name');
+
+const converterNameText = ['валют', 'веса', 'длины'];
+
+
+let buttonCalculate;
+// Массивы селектов
+let arrOfInput = [];
+let arrOfSelect = [];
+
+// Слушатель на кнопки показа конверторов
+menuListNode.addEventListener('click', (e) => {
+    buttonCalculate = e.target.id;
+
+    function hideMenu(button) {
+        popupMenu.style.display = "none";
+
+        if (button === '0') {
+            converterMoney.style.display = "block";
+            converterWeight.style.display = "none"
+
+            converterName.textContent = converterNameText[0];
+
+            // Массив инпутов валюты
+            arrOfInput = [firstInputNode, secondInputNode];
+            arrOfSelect = [firstSelect, secondSelect]
+            return;
+        } else if (button === '1') {
+            converterMoney.style.display = "none";
+            converterWeight.style.display = "flex"
+
+            converterName.textContent = converterNameText[1];
+            
+            // Массив инпутов веса
+            arrOfInput = [thirdInputNode, fourthInputNode];
+            arrOfSelect = [thirdSelect, fourthSelect]
+            return;
+        } else {
+            return;
+        }
+    }
+
+    hideMenu(buttonCalculate);
+});
+console.log(buttonCalculate);
+
+
+
+// Вывод результата 
+const converterOutputs = document.querySelectorAll('.converter__output');
+let idFocusInput;
+
+// Массив с введенными данными
+let outputArr = [];
+// Массив outputArr преобразованный в строку
+let outputString = '';
+// Масиив инпутов
+
+
+// Определяет какой инпут нажат
+function getInputId(e) {
+    idFocusInput = e.target.id;
+    console.log(idFocusInput);
+    console.log(arrOfInput);
+
+    // Функция для очистки инпутов
+    function delInput(arrOfInput) {
+        outputArr = [];
+        arrOfInput[0].value = '';
+        arrOfInput[1].value = '';
+    }
+
+    // Стирает значение при фокусе на друом инпут
+    if (idFocusInput === '0') {
+        delInput(arrOfInput);
+    } else {
+        delInput(arrOfInput);
+    }
+
+    return;
+}
+
+// Слушатель на нажатый инпут
+converterOutputs.forEach(el => {
+    el.addEventListener("focusin", ((e) => getInputId(e)));
+});
+
+
+// –––––––––––––––––––––––––––––––– ВАЛЮТА ––––––––––––––––––––––––––––––––
 // Округляет если число не целое
 function isInteger(x) {
     if (Number.isInteger(x)) {
@@ -34,6 +138,280 @@ function isInteger(x) {
     }
 }
 
+// Методика расчета курса валют
+function exchangeSomething(arrOfSelect, index, secondInputIndex, getSum) {
+    if (buttonCalculate === '0') {
+        // Расчет курса в зависимости от выбранных валют
+        if (arrOfSelect[index].value === 'USD') { // 1. Расчет первого инпута: ДОЛЛАР
+            if (arrOfSelect[secondInputIndex].value === 'RUB') {
+                // Результат
+                let result = isInteger(getSum * dollar_Ruble);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+                // Результат
+                let result = isInteger(getSum * dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+                // Результат
+                let result = isInteger(getSum * dollar_СNY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
+                // Результат
+                let result = isInteger(getSum * dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
+                // Результат
+                let result = isInteger(getSum * dollar_GBP);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else {
+                // Результат
+                let result = getSum;
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            }
+        } else if (arrOfSelect[index].value === 'RUB') { // 2. Расчет первого инпута: РУБЛЬ
+            if (arrOfSelect[secondInputIndex].value === 'USD') {
+                // Результат
+                let result = isInteger(getSum / dollar_Ruble);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+                // Результат
+                let result = isInteger(getSum / dollar_Ruble * dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+                // Результат
+                let result = isInteger(getSum / dollar_Ruble * dollar_СNY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
+                // Результат
+                let result = isInteger(getSum / dollar_Ruble * dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
+                // Результат
+                let result = isInteger((getSum * dollar_GBP) / dollar_Ruble);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else {
+                // Результат
+                let result = getSum;
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            }
+        } else if (arrOfSelect[index].value === 'EUR') { // 3. Расчет первого инпута: ЕВРО
+            if (arrOfSelect[secondInputIndex].value === 'USD') {
+                // Результат
+                let result = isInteger(getSum / dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+                // Результат
+                let result = isInteger(getSum * dollar_Ruble / dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+                // Результат
+                let result = isInteger(getSum * dollar_СNY / dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
+                // Результат
+                let result = isInteger(getSum * dollar_JPY / dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
+                // Результат
+                let result = isInteger((getSum * dollar_GBP) / dollar_Euro);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else {
+                // Результат
+                let result = getSum;
+    
+                // Выводит результат в нужный инпут           
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            }
+        } else if (arrOfSelect[index].value === 'CNY') { // 4. Расчет первого инпута: ЮАНЬ
+            if (arrOfSelect[secondInputIndex].value === 'USD') {
+                // Результат
+                let result = isInteger(getSum / dollar_СNY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+                // Результат
+                let result = isInteger(getSum * dollar_Ruble / dollar_СNY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+                // Результат
+                let result = isInteger((getSum * dollar_Euro) / dollar_СNY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
+                // Результат
+                let result = isInteger(getSum / dollar_СNY * dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
+                // Результат
+                let result = isInteger((getSum * dollar_GBP) / dollar_СNY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else {
+                // Результат
+                let result = getSum;
+    
+                // Выводит результат в нужный инпут           
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            }
+        } else if (arrOfSelect[index].value === 'JPY') { // 5. Расчет первого инпута: ИЕНА
+            if (arrOfSelect[secondInputIndex].value === 'USD') {
+                // Результат
+                let result = isInteger(getSum / dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+                // Результат
+                let result = isInteger(getSum * dollar_Ruble / dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+                // Результат
+                let result = isInteger((getSum * dollar_Euro) / dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+                // Результат
+                let result = isInteger((getSum * dollar_СNY) / dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
+                // Результат
+                let result = isInteger((getSum * dollar_GBP) / dollar_JPY);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else {
+                // Результат
+                let result = getSum;
+    
+                // Выводит результат в нужный инпут           
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            }
+        } else if (arrOfSelect[index].value === 'GBP') { // 6. Расчет первого инпута: ФУНТ СТЕРЛИНГОВ
+            if (arrOfSelect[secondInputIndex].value === 'USD') {
+                // Результат
+                let result = isInteger(getSum / dollar_GBP);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
+                // Результат
+                let result = isInteger(getSum * dollar_Ruble / dollar_GBP);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
+                // Результат
+                let result = isInteger((getSum * dollar_Euro) / dollar_GBP);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
+                // Результат
+                let result = isInteger((getSum * dollar_СNY) / dollar_GBP);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
+                // Результат
+                let result = isInteger((getSum * dollar_JPY) / dollar_GBP);
+    
+                // Выводит результат в нужный инпут
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            } else {
+                // Результат
+                let result = getSum;
+    
+                // Выводит результат в нужный инпут           
+                arrOfInput[secondInputIndex].value = result;
+                return;
+            }
+        }
+    } else if (buttonCalculate === '1') {
+        console.log('Что-то');
+        console.log(arrOfSelect);
+    }
+}
 
 // Функция расчета курса
 function calculateExchangeRate(index) {
@@ -47,286 +425,17 @@ function calculateExchangeRate(index) {
         secondInputIndex = 0;
     }
 
-    // Нода селекта
-    const firstSelect = document.querySelector('.converter__output-select--fisrt');
-    const secondSelect = document.querySelector('.converter__output-select--second');
 
-    // Масиив селектов
-    let arrOfSelect = [firstSelect, secondSelect];
 
     // Масиив инпутов
-    let arrOfInput = [firstInputNode, secondInputNode];
+    // let arrOfInput = [firstInputNode, secondInputNode];
 
     // Введенное значение
     let getSum = arrOfInput[index].value;
 
+    // Функция расчета курса валют
+    exchangeSomething(arrOfSelect, index, secondInputIndex, getSum);
 
-    // Расчет курса в зависимости от выбранных валют
-    if (arrOfSelect[index].value === 'USD') { // 1. Расчет первого инпута: ДОЛЛАР
-        if (arrOfSelect[secondInputIndex].value === 'RUB') {
-            // Результат
-            let result = isInteger(getSum * dollar_Ruble);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
-            // Результат
-            let result = isInteger(getSum * dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
-            // Результат
-            let result = isInteger(getSum * dollar_СNY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
-            // Результат
-            let result = isInteger(getSum * dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
-            // Результат
-            let result = isInteger(getSum * dollar_GBP);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else {
-            // Результат
-            let result = getSum;
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        }
-    } else if (arrOfSelect[index].value === 'RUB') { // 2. Расчет первого инпута: РУБЛЬ
-        if (arrOfSelect[secondInputIndex].value === 'USD') {
-            // Результат
-            let result = isInteger(getSum / dollar_Ruble);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
-            // Результат
-            let result = isInteger(getSum / dollar_Ruble * dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
-            // Результат
-            let result = isInteger(getSum / dollar_Ruble * dollar_СNY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
-            // Результат
-            let result = isInteger(getSum / dollar_Ruble * dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
-            // Результат
-            let result = isInteger((getSum * dollar_GBP) / dollar_Ruble);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else {
-            // Результат
-            let result = getSum;
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        }
-    } else if (arrOfSelect[index].value === 'EUR') { // 3. Расчет первого инпута: ЕВРО
-        if (arrOfSelect[secondInputIndex].value === 'USD') {
-            // Результат
-            let result = isInteger(getSum / dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
-            // Результат
-            let result = isInteger(getSum * dollar_Ruble / dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
-            // Результат
-            let result = isInteger(getSum * dollar_СNY / dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
-            // Результат
-            let result = isInteger(getSum * dollar_JPY / dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
-            // Результат
-            let result = isInteger((getSum * dollar_GBP) / dollar_Euro);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else {
-            // Результат
-            let result = getSum;
-
-            // Выводит результат в нужный инпут           
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        }
-    } else if (arrOfSelect[index].value === 'CNY') { // 4. Расчет первого инпута: ЮАНЬ
-        if (arrOfSelect[secondInputIndex].value === 'USD') {
-            // Результат
-            let result = isInteger(getSum / dollar_СNY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
-            // Результат
-            let result = isInteger(getSum * dollar_Ruble / dollar_СNY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
-            // Результат
-            let result = isInteger((getSum * dollar_Euro) / dollar_СNY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
-            // Результат
-            let result = isInteger(getSum / dollar_СNY * dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
-            // Результат
-            let result = isInteger((getSum * dollar_GBP) / dollar_СNY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else {
-            // Результат
-            let result = getSum;
-
-            // Выводит результат в нужный инпут           
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        }
-    } else if (arrOfSelect[index].value === 'JPY') { // 5. Расчет первого инпута: ИЕНА
-        if (arrOfSelect[secondInputIndex].value === 'USD') {
-            // Результат
-            let result = isInteger(getSum / dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
-            // Результат
-            let result = isInteger(getSum * dollar_Ruble / dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
-            // Результат
-            let result = isInteger((getSum * dollar_Euro) / dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
-            // Результат
-            let result = isInteger((getSum * dollar_СNY) / dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'GBP') {
-            // Результат
-            let result = isInteger((getSum * dollar_GBP) / dollar_JPY);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else {
-            // Результат
-            let result = getSum;
-
-            // Выводит результат в нужный инпут           
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        }
-    } else if (arrOfSelect[index].value === 'GBP') { // 6. Расчет первого инпута: ФУНТ СТЕРЛИНГОВ
-        if (arrOfSelect[secondInputIndex].value === 'USD') {
-            // Результат
-            let result = isInteger(getSum / dollar_GBP);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'RUB') {
-            // Результат
-            let result = isInteger(getSum * dollar_Ruble / dollar_GBP);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'EUR') {
-            // Результат
-            let result = isInteger((getSum * dollar_Euro) / dollar_GBP);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'CNY') {
-            // Результат
-            let result = isInteger((getSum * dollar_СNY) / dollar_GBP);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else if (arrOfSelect[secondInputIndex].value === 'JPY') {
-            // Результат
-            let result = isInteger((getSum * dollar_JPY) / dollar_GBP);
-
-            // Выводит результат в нужный инпут
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        } else {
-            // Результат
-            let result = getSum;
-
-            // Выводит результат в нужный инпут           
-            arrOfInput[secondInputIndex].value = result;
-            return;
-        }
-    }
 }
 
 // Слушатели на Инпуте
@@ -335,41 +444,6 @@ secondInputNode.addEventListener('input', (() => calculateExchangeRate('1')));
 
 
 
-
-// Вывод результата 
-const converterOutput = document.querySelector('.converter__output');
-let idFocusInput;
-
-
-// Массив с введенными данными
-let outputArr = [];
-// Массив outputArr преобразованный в строку
-let outputString = '';
-// Масиив инпутов
-let arrOfInput = [firstInputNode, secondInputNode];
-
-
-// Определяет какой инпут нажат
-function getInputId(e) {
-    idFocusInput = e.target.id;
-    console.log(idFocusInput);
-
-    // Стирает значение при фокусе на друом инпут
-    if (idFocusInput === '0') {
-        outputArr = [];
-        arrOfInput[0].value = '';
-        arrOfInput[1].value = '';
-    } else {
-        outputArr = [];
-        arrOfInput[0].value = '';
-        arrOfInput[1].value = '';
-    }
-
-    return;
-}
-
-// Слушатель на нажатый инпут
-converterOutput.addEventListener("focusin", ((e) => getInputId(e)));
 
 
 
